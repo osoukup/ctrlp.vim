@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     # one-way rsync of this directory by default to /vagrant - link it to home dir
     # unfortunately I do not know how to sync it onto /home/vagrant without vagrant
     # aksing fot password so it is sysnced into it as /home/vagrant/vagrant
-    config.vm.provision "shell", inline: "yum install -y vim ; rpm -ivh /vagrant/*.rpm"
+    config.vm.provision "shell", inline: "yum install vim -y ; INSTALL"
 
     # welcome message
     config.vm.post_up_message = "run vim and <ctrl>p to test that it works"

@@ -15,11 +15,12 @@ mkdir vagrant
 cp Vagrantfile vagrant/Vagrantfile
 cp ~/rpmbuild/RPMS/noarch/$SOURCE vagrant
 sed -i "s/[[:digit:]][[:digit:]]-cloud-base/$VERSION_ID-cloud-base/g" vagrant/Vagrantfile
+sed -i "s/INSTALL/rpm -ivh \/vagrant\/*.rpm/g" vagrant/Vagrantfile
 
 pushd vagrant
 vagrant up
 vagrant ssh
-vagrant destroy
+vagrant destroy -f
 popd
 
 rm -r vagrant
