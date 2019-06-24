@@ -6,16 +6,22 @@ if ! rpmlint -i vim-ctrlp.spec; then
     exit 1;
 fi
 
-VERSION=`grep Version vim-ctrlp.spec | cut -d: -f2 | xargs`
-
 rpmdev-setuptree
-pushd ctrlp.vim/
-tar -czf vim-ctrlp-$VERSION.tar.gz *
-popd
-cp ctrlp.vim/vim-ctrlp-$VERSION.tar.gz ~/rpmbuild/SOURCES/
-rm ctrlp.vim/vim-ctrlp-$VERSION.tar.gz
-cp vim-ctrlp.metainfo.xml ~/rpmbuild/SOURCES/
+
 cp vim-ctrlp.spec ~/rpmbuild/SPECS/
+
+# local or remote sources
+if [[ $1 = "--local" ]]; then
+    VERSION=`grep Version vim-ctrlp.spec | cut -d: -f2 | xargs`
+    pushd ctrlp.vim/
+    tar -czf vim-ctrlp-$VERSION.tar.gz *
+    mv vim-ctrlp-$VERSION.tar.gz ~/rpmbuild/SOURCES/
+    cp LICENSE ~/rpmbuild/SOURCES/
+    popd
+    cp vim-ctrlp.metainfo.xml ~/rpmbuild/SOURCES/
+else
+    spectool -g -R ~/rpmbuild/SPECS/vim-ctrlp.spec
+fi
 
 rpmbuild --quiet -ba ~/rpmbuild/SPECS/vim-ctrlp.spec
 rpmlint -i ~/rpmbuild/RPMS/noarch/*
