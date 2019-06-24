@@ -7,6 +7,7 @@ License:        Vim
 URL:            https://github.com/ctrlpvim/ctrlp.vim
 Source0:        https://github.com/ctrlpvim/ctrlp.vim/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        https://raw.githubusercontent.com/osoukup/ctrlp.vim/master/%{name}.metainfo.xml
+Source2:        https://raw.githubusercontent.com/ctrlpvim/ctrlp.vim/2e773fd8c7548526853fff6ee2e642eafbbe3d04/LICENSE
 
 Requires:       vim-filesystem
 Requires:       vim-common
