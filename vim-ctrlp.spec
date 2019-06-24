@@ -1,11 +1,15 @@
+%global commit 2e773fd8c7548526853fff6ee2e642eafbbe3d04
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global snapshotdate 20190610
+
 Name:           vim-ctrlp
 Version:        1.80
-Release:        1%{?dist}
+Release:        1.%{snapshotdate}git%{shortcommit}%{?dist}
 Summary:        Full path fuzzy file, buffer, mru, tag, ... finder for Vim
 
 License:        Vim
 URL:            https://github.com/ctrlpvim/ctrlp.vim
-Source0:        https://github.com/ctrlpvim/ctrlp.vim/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/ctrlpvim/ctrlp.vim/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
 Source1:        https://raw.githubusercontent.com/osoukup/ctrlp.vim/master/%{name}.metainfo.xml
 
 Requires:       vim-filesystem
@@ -25,7 +29,7 @@ support for Vim's |regexp| as search pattern, built-in MRU files monitoring,
 project's root finder, and more.
 
 %prep
-%setup -cq
+%autosetup -n ctrlp.vim-%{commit}
 
 %build
 
@@ -53,5 +57,5 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.metainfo.xm
 
 
 %changelog
-* Tue Feb 26 2019 Ondřej Soukup <osoukup@redhat.com> - 1.80-1
+* Tue Feb 26 2019 Ondřej Soukup <osoukup@redhat.com> - 1.80-1.20190610git2e773fd
 - Initial package.
