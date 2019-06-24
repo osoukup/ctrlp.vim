@@ -3,8 +3,7 @@
 
 source /etc/os-release
 
-VERSION=`grep Version vim-ctrlp.spec | cut -d: -f2 | xargs`
-SOURCE=vim-ctrlp-$VERSION-1.fc$VERSION_ID.noarch.rpm
+SOURCE=$(basename $(find ~/rpmbuild/RPMS/noarch/*))
 
 if [[ ! -e ~/rpmbuild/RPMS/noarch/$SOURCE ]]; then
     echo "ERROR: no RPM found";

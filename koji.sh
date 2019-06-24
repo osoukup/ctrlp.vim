@@ -6,8 +6,7 @@
 
 source /etc/os-release
 
-VERSION=`grep Version vim-ctrlp.spec | cut -d: -f2 | xargs`
-SOURCE=vim-ctrlp-$VERSION-1.fc$VERSION_ID.src.rpm
+SOURCE=$(basename $(find ~/rpmbuild/SRPMS/*))
 
 if [[ ! -e ~/rpmbuild/SRPMS/$SOURCE ]]; then
     echo "ERROR: no SRPM found";
